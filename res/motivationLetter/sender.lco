@@ -1,0 +1,45 @@
+\ProvidesFile{sender.lco}[letter-class-option file]
+
+% symbols: Mobilephone, Phone, E-Mail
+\RequirePackage{marvosym}
+
+% Text of this document (sender.lco) is UTF-8 encoded
+\RequirePackage[utf8]{inputenc}
+
+% if yu wnat some colors...
+\RequirePackage{color}
+
+
+% see Koma script for more detailed descriptions
+% comment or delate if not needed
+\KOMAoptions{
+    foldmarks=true,
+    fromalign=right,
+    footsepline=off,
+    fromurl=off,
+    fromemail=true,
+    fromfax=off,
+    fromphone=false,
+    frommobilephone=true,
+    fromlogo=on
+}
+
+% Sender data:
+\setkomavar{frommobilephone}[\Mobilefone~]{0681521472}
+\setkomavar{fromemail}[\Letter~]{arthur.hamelin12@gmail.com}
+\setkomavar{backaddress}{Hamelin Arthur, 190 Boulevard Jules Verne, 44300, Nantes, France}
+\setkomavar{fromaddress}{Hamelin Arthur\\190 Boulevard Jules Verne\\44300, Nantes}
+
+% optical stuff:
+\setkomafont{fromname}{\bfseries\color{black}\LARGE}
+\setkomafont{fromrule}{\color{black}}
+\setkomafont{fromaddress}{\small\rmfamily\mdseries\slshape\color{black}}
+
+\setkomafont{addressee}{\small}
+
+\renewcommand*{\raggedsignature}{\raggedright}
+
+% define vertical distance for signature
+\@setplength{sigbeforevskip}{1.8cm}
+\endinput
+

@@ -1,0 +1,14 @@
+---
+
+Ia:
+
+  enable: false
+  apiKey: "sk-###################"
+  safeMode: false
+
+Email:
+
+  enable: true
+  apiKey: "###################"
+  emailLogin: "email@gmail.com"
+  emailFrom: "email@email.com"

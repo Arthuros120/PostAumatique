@@ -1,0 +1,5 @@
+# Système d'envoi automatique de mails pour ma recherche de stage
+
+```bash
+pip install -r requirements.txt
+```

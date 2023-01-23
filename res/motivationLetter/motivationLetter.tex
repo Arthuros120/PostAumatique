@@ -1,0 +1,64 @@
+\documentclass[
+    french,
+    sender,
+    paper=a4,
+    version=last,
+    fontsize=9pt,
+    DIV=12,
+    BCOR=0mm
+]{scrlttr2}
+
+\parskip3mm
+\parindent0mm % if you want to have no lineskip
+
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage{graphicx}
+
+% Set Font: sans serif Latin Modern
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+
+% Set Page layout:
+\usepackage{changepage}
+
+\changepage{+3cm}{}{}{}{}{}{}{}{-5cm}
+
+\setkomavar{fromlogo}{\includegraphics[width=6cm]{¤Base_Url¤/res/motivationLetter/img/logoIutNantes.png}}
+\setkomavar{signature}{Hamelin Arthur\\\includegraphics[width=1.5cm]{¤Base_Url¤//res/motivationLetter/img/Signature_2023.png}}
+\LoadLetterOption{¤Base_Url¤/res/motivationLetter/sender}
+
+\begin{document}
+% Set Appendix text at very end (dubble point will be set automatically)
+\setkomavar*{enclseparator}{Appendix}
+
+\setkomavar{subject}{Objet :  Candidature pour un stage de 10 semaines dans le développement ou la maintenance applicative au sein de l’entreprise ¤Society¤.}
+
+\setkomavar{date}{\today}
+\setkomavar{place}{Nantes}
+
+
+% Set recipient of letter
+\begin{letter}{
+    Service recrutement\\
+    ¤Society¤\\
+    ¤Addresse¤\\
+    ¤PostalCode¤ ¤City¤
+}
+
+\opening{Madame, Monsieur,}
+
+\selectlanguage{french}
+
+¤Body¤
+
+¤BodySociety¤
+
+Dans l’attente d’une réponse que j'espère favorable à un entretien.
+
+\closing{Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations les plus distinguées.\\}
+
+\end{letter}
+\end{document}
