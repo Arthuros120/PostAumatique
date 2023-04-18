@@ -65,7 +65,7 @@ class Generator:
 
             self.logger.info(
                 "Création du dossier de la société: " + society.get_name() + "...")
-            export_society_path = self.export_path + "/" + society.get_name()
+            export_society_path = self.export_path + "/" + society.get_name().replace(" ", "_")
             export_society_paths.append(export_society_path)
 
             os.mkdir(export_society_path)
@@ -107,7 +107,7 @@ class Generator:
         self.logger.info("Génération du cv de la société: " +
                          society.get_name() + "...")
         cv_path = export_society_path + \
-            "/Cv_Hamelin_Arthur_" + society.get_name() + ".pdf"
+            "/Cv_Hamelin_Arthur_" + society.get_name().replace(" ", "_") + ".pdf"
         shutil.copy("res/cv/Cv_Hamelin_Arthur_20230117.pdf", cv_path)
 
         society.cv_path = cv_path
@@ -132,10 +132,10 @@ class Generator:
             "Génération de la lettre de motivation de la société: " + society.get_name() + "...")
 
         motiv_letter_tex_path = export_society_path + \
-            "/Arthur-Hamelin_Lettre-de-motivation_" + society.get_name() + ".tex"
+            "/Arthur-Hamelin_Lettre-de-motivation_" + society.get_name().replace(" ", "_") + ".tex"
 
         motiv_letter_pdf_path = export_society_path + \
-            "/Arthur-Hamelin_Lettre-de-motivation_" + society.get_name() + ".pdf"
+            "/Arthur-Hamelin_Lettre-de-motivation_" + society.get_name().replace(" ", "_") + ".pdf"
 
         shutil.copy(
             "res/motivationLetter/motivationLetter.tex",

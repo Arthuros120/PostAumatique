@@ -79,8 +79,7 @@ class EmailSenderClass:
         msg['From'] = "Hamelin Arthur <" + self.fromaddr + ">"
         msg['To'] = society.get_email()
 
-        msg['Subject'] = "Hamelin Arthur - Recherche de stage dans l’informatique chez {}".format(
-            society.get_name())
+        msg['Subject'] = "Hamelin Arthur - Etudiant à l'IUT de Nantes - Recherche de stage dans l'informatique"
 
         email_html = self.load_email_template("res/mail/index.html")
 

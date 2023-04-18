@@ -60,17 +60,30 @@ class Ia:
             for i in range(0, 3):
 
                 self.logger.info("Génération du texte", i + 1, "...")
-
-                response = openai.Completion.create(
-                    model="text-davinci-003",
-                    prompt=speech_text,
-                    temperature=0.5,
-                    max_tokens=200,
-                    top_p=1,
-                    frequency_penalty=0,
-                    presence_penalty=0.6,
-                    stop=["¤"]
-                )
+                
+                while True:
+                    
+                    try:
+                    
+                        response = openai.Completion.create(
+                            model="text-davinci-003",
+                            prompt=speech_text,
+                            temperature=0.5,
+                            max_tokens=200,
+                            top_p=1,
+                            frequency_penalty=0,
+                            presence_penalty=0.6,
+                            stop=["¤"]
+                        )
+                        
+                        break
+                
+                    except Exception as e:
+                        
+                        self.logger.error("Une erreur est survenue lors de la génération du texte, on recommence...")
+                        self.logger.error(e)
+                        
+                        continue
 
                 choices.append(response.choices[0].text.replace("\n", ""))
 
@@ -104,16 +117,29 @@ class Ia:
             self.logger.warning(
                 "Mode safe désactivé, je génère un seul texte pour toi...")
 
-            response = openai.Completion.create(
-                model="text-davinci-003",
-                prompt=speech_text,
-                temperature=0.5,
-                max_tokens=200,
-                top_p=1,
-                frequency_penalty=0,
-                presence_penalty=0.6,
-                stop=["¤"]
-            )
+            while True:
+                    
+                    try:
+                    
+                        response = openai.Completion.create(
+                            model="text-davinci-003",
+                            prompt=speech_text,
+                            temperature=0.5,
+                            max_tokens=200,
+                            top_p=1,
+                            frequency_penalty=0,
+                            presence_penalty=0.6,
+                            stop=["¤"]
+                        )
+                        
+                        break
+                
+                    except Exception as e:
+                        
+                        self.logger.error("Une erreur est survenue lors de la génération du texte, on recommence...")
+                        self.logger.error(e)
+                        
+                        continue
 
             choice = response.choices[0].text.replace("\n", "")
 
