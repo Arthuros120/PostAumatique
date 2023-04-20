@@ -108,7 +108,7 @@ class Generator:
                          society.get_name() + "...")
         cv_path = export_society_path + \
             "/Cv_Hamelin_Arthur_" + society.get_name().replace(" ", "_") + ".pdf"
-        shutil.copy("res/cv/Cv_Hamelin_Arthur_20230117.pdf", cv_path)
+        shutil.copy("res/cv/{}".format(self.config.CVPATH), cv_path)
 
         society.cv_path = cv_path
 

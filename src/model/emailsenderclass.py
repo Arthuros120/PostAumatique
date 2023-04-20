@@ -5,6 +5,7 @@
 
 import logging
 import smtplib
+import os
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -19,6 +20,8 @@ class EmailSenderClass:
         self.logger = logging.getLogger('PostAumatique-Log')
 
         self.logger.info("Initialisation de l'envoi d'email...")
+        
+        self.config = config
 
         self.logaddr = config.get("Email", "emailLogin")
         self.fromaddr = config.get("Email", "emailFrom")
@@ -91,13 +94,13 @@ class EmailSenderClass:
 
         self.logger.info("Template d'email formaté avec succès !")
 
-        self.logger.info("Attachement du template d'email...")
+        self.logger.info("attachment du template d'email...")
         # Add text to message
         msg.attach(MIMEText(email_html, 'html'))
 
         self.logger.info("Template d'email attaché avec succès !")
 
-        self.logger.info("Attachement des fichiers...")
+        self.logger.info("attachment des fichiers...")
         self.logger.info("Récupération des fichiers à attacher...")
 
         attach_files_name = society.get_files()
@@ -134,7 +137,7 @@ class EmailSenderClass:
                     f"attachment; filename= {file_name.split('/')[-1]}",
                 )
 
-                self.logger.info("Attachement du fichier...")
+                self.logger.info("attachment du fichier...")
                 # Add attachment to message and convert message to string
                 msg.attach(part)
 

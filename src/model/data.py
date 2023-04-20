@@ -17,11 +17,13 @@ from . import society
 class Data:
     """Data class"""
 
-    def __init__(self, path_csv: str):
+    def __init__(self, path_csv: str, config):
 
         self.logger = logging.getLogger('PostAumatique-Log')
 
         self.logger.info("Initialisation de la classe Data...")
+        
+        self.config = config
 
         self.logger.info("Récupération du fichier csv...")
         self.path_csv = path_csv
@@ -64,6 +66,11 @@ class Data:
                 continue
 
             info = row[0].split(",")
+            
+            excludeOn = True
+            
+            if info[5].lower().strip() != "true":
+                excludeOn = False
 
             societys.append(society.Society(
                 info[0],
@@ -71,6 +78,8 @@ class Data:
                 info[2],
                 info[3],
                 info[4],
+                excludeOn,
+                self.config
             ))
 
         self.logger.info("Fermeture du fichier csv...")

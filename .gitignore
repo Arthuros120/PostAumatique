@@ -132,4 +132,4 @@ dmypy.json
 config/config.yml
 import/*
 export/*
-res/attachement/reportCard/*
+res/attachment/reportCard/*

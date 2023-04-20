@@ -2,6 +2,7 @@
 """society"""
 
 import logging
+import os
 from model.exception import NotBodyException, NotBodySocietyException
 
 
@@ -9,7 +10,7 @@ class Society:
     """Society
     """
 
-    def __init__(self, name: str, addresse: str, postal_code: str, city: str, email: str):
+    def __init__(self, name: str, addresse: str, postal_code: str, city: str, email: str, exclude_on : bool, config):
 
         self.logger = logging.getLogger("PostAumatique-Log")
 
@@ -29,11 +30,16 @@ class Society:
 
         self.logger.info("Email de la société: " + email)
         self.email = email
+        
+        self.logger.info("Exlusion des fichiers ?: " + str(exclude_on))
+        self.exclude_on = exclude_on
 
         self.cv_path = ""
         self.motiv_letter = ""
         self.body_text = ""
         self.body_society_text = ""
+        
+        self.config = config
 
         self.logger.info("Génération de la société réussi !")
 
@@ -114,19 +120,48 @@ class Society:
             raise NotBodySocietyException("body_society_text is empty")
         else:
             return self.body_society_text
+        
+    def recover_attachment(self) :
+        
+        self.logger.info("Récupération de la pièce jointe...")
+        
+        attachment_paths = []
+        
+        excludeFolder = self.config.RES_EXCLUDEFOLDER
+        
+        if excludeFolder is None or self.exclude_on == False:
+            excludeFolder = []
+        
+        for root, _, files in os.walk("res/attachment"):
+            for file in files:
+                if len(excludeFolder) != 0:
+                    for exclude in excludeFolder:
+                        if exclude not in root.split("/"):
+                            attachment_paths.append(os.path.join(root, file))
+                        else:
+                            self.logger.info("Fichier {} exclu de la récupération de la pièce jointe".format(os.path.join(root, file)))
+                else:
+                    attachment_paths.append(os.path.join(root, file))
 
-    def get_paths(self) -> str:
-        """get_paths"""
-
-        path_cv = self.cv_path.split("/")[-1]
-        path_motiv_letter = self.motiv_letter.split("/")[-1]
-
-        return path_cv + ", " + path_motiv_letter + ", lettre_recommandation_Arthur_Castorama.pdf"
-
+        self.logger.info("Pièce jointe récupérée avec succès !")
+        
+        return attachment_paths
+    
     def get_files(self) -> list[str]:
         """get_files"""
 
-        return [self.cv_path, self.motiv_letter, "res/recomandationLetter/lettre_recommandation_Arthur_Castorama.pdf"]
+        return [self.cv_path, self.motiv_letter, "res/recomandationLetter/lettre_recommandation_Arthur_Castorama.pdf"] + self.recover_attachment()
+
+    def get_paths(self) -> str:
+        """get_paths"""
+        
+        files = self.get_files()
+        message = ""
+        
+        for file in files:
+            message += file.split("/")[-1] + ", "
+
+        return message[:-2]
 
     def afficher(self) -> str:
         """afficher"""

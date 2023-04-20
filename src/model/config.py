@@ -28,6 +28,11 @@ class config:
 
         self.RES_IA = {}
         self.RES_EMAIL = {}
+        self.RES_EXCLUDEFOLDER = {}
+        
+        self.CVPATH = ""
+        
+        self.logger.info("Dictionnaires de configuration créés avec succès !")
 
         self.logger.info("Chargement du fichier de configuration...")
         self.path = path
@@ -49,7 +54,21 @@ class config:
                 elif key == "Email":
 
                     self.RES_EMAIL = value
+                
+                elif key == "ExcludeFolder":
+
+                    self.RES_EXCLUDEFOLDER = value
                     
+                elif key == "CvPath":
+
+                    self.CVPATH = value
+        
+        
+        if self.CVPATH == "":
+            
+            raise NotConfigParamException(
+                "Error: CvPath not found")
+        
         self.logger.info("Configuration créée avec succès !")
 
     # Permet de récupérer les données d'un fichier de configuration
@@ -69,6 +88,14 @@ class config:
         elif types == "Email":
 
             res = self.RES_EMAIL[str(arguments)]
+        
+        elif types == "ExcludeFolder":
+
+            res = self.RES_EXCLUDEFOLDER[str(arguments)]
+        
+        elif types == "CvPath":
+            
+            res = self.CVPATH
 
         if res == None:
 

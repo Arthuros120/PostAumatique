@@ -87,7 +87,7 @@ if __name__ == "__main__":
             logger.error("Erreur: le fichier " + input_file + " n'existe pas")
 
     logger.info("Importation des données...")
-    data = Data("import/" + input_file + ".csv")
+    data = Data("import/" + input_file + ".csv", config)
 
     logger.info("Génération des lettres de motivation et des CV...")
     generator = Generator(data, config)

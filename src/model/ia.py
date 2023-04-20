@@ -85,7 +85,7 @@ class Ia:
                         
                         continue
 
-                choices.append(response.choices[0].text.replace("\n", ""))
+                choices.append(response.choices[0].text.replace("\n", "")) # type: ignore
 
             self.logger.info(
                 "Voici les 3 propositions de textes que j'ai pu générer pour toi:")
@@ -141,7 +141,7 @@ class Ia:
                         
                         continue
 
-            choice = response.choices[0].text.replace("\n", "")
+            choice = response.choices[0].text.replace("\n", "") # type: ignore
 
         self.logger.info("J'ai fini de générer le texte pour toi !")
 
