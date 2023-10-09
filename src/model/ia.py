@@ -59,7 +59,7 @@ class Ia:
 
             for i in range(0, 3):
 
-                self.logger.info("Génération du texte", i + 1, "...")
+                self.logger.info("Génération du texte {} ...".format(i + 1))
                 
                 while True:
                     
@@ -92,7 +92,7 @@ class Ia:
 
             for i in range(0, len(choices)):
                 print()
-                self.logger.info(i + 1, ":", choices[i])
+                self.logger.info("{}: {}".format((i + 1), choices[i]))
                 print()
 
             self.logger.debug("Demande de sélection du texte...")
@@ -108,7 +108,7 @@ class Ia:
 
                 self.logger.debug("Retour de l'utilisateur : " + select)
 
-            self.logger.info("Je choisis le texte", select, "...")
+            self.logger.info("Je choisis le texte {} ...".format(select))
 
             choice = choices[int(select) - 1]
 
